@@ -42,7 +42,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
             Image.asset(
               'assets/images/car2.jpg',
               fit: BoxFit.contain,
-              width: MediaQuery.of(context).size.width * 0.8,
+              width: MediaQuery.of(context).size.height * 0.8,
             ),
             const SizedBox(height: 20),
             const Text(

@@ -24,15 +24,79 @@ class WelcomeBody extends StatelessWidget {
       crossAxisCount = 1; // For small screens (mobile)
     }
 
+    // تعريف بيانات الأزرار الستة
+    List<Map<String, dynamic>> buttonsData = [
+      {
+        'title': 'lidar',
+        'subtitle': 'Manage and organize op room',
+        'icon': Icons.leaderboard, // Example icon
+        'onTap': () {
+          Navigator.pushNamed(context, "/lidar");
+          print('Station button pressed');
+        },
+      },
+      {
+        'title': 'Reports',
+        'subtitle': 'Submit and manage reports',
+        'icon': Icons.assignment, // Example icon
+        'onTap': () {
+          Navigator.pushNamed(context, "/reports");
+          print('Reports button pressed');
+        },
+      },
+      {
+        'title': 'radio',
+        'subtitle': 'Manage sectors and radio message',
+        'icon': Icons.radio, // Example icon
+        'onTap': () {
+          Navigator.pushNamed(context, "/radiocar");
+          print('Sectors button pressed');
+        },
+      },
+      {
+        'title': 'Center',
+        'subtitle': 'Manage main center',
+        'icon': Icons.house_sharp, // Example icon
+        'onTap': () {
+          Navigator.pushNamed(context, "/cinter");
+          print('Center button pressed');
+        },
+      },
+      {
+        'title': 'Settings',
+        'subtitle': 'Customize system settings',
+        'icon': Icons.settings, // Example icon
+        'onTap': () {
+          // تم تعديل المسار هنا لتصحيحه إذا كان المقصود هو /settings
+          Navigator.pushNamed(context, "/seting"); 
+          print('Settings button pressed');
+        },
+      },
+      // ⭐ إضافة الزر الجديد: Dashboard
+      {
+        'title': 'Dashboard',
+        'subtitle': 'View system overview and statistics',
+        'icon': Icons.dashboard, // آيقونة مناسبة
+        'onTap': () {
+          // المسار المطلوب للانتقال إلى صفحة لوحة القيادة
+          Navigator.pushNamed(context, "/Dashboard"); 
+          print('Dashboard button pressed');
+        },
+      },
+    ];
+    
+    // ⭐ تحديد عدد العناصر ليكون مساوياً لعدد الأزرار في القائمة
+    final int buttonCount = buttonsData.length; // سيكون 6 الآن
+
     return Container(
       // Optional: Add padding around the entire content
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
           // Header section
+          // (المحتوى الخاص بالهيدر محذوف في الكود الأصلي، يمكنك إضافته هنا)
 
           // Spacer below the header
-
           const SizedBox(height: 40), // Spacer below the welcome text
 
           // Flexible Grid of Buttons
@@ -46,62 +110,10 @@ class WelcomeBody extends StatelessWidget {
                 mainAxisSpacing: 20.0, // Spacing between rows
                 childAspectRatio: 1.2, // Adjust aspect ratio for better button sizing
               ),
-              itemCount: 5, // Number of buttons
+              // ⭐ التغيير هنا: استخدام buttonCount بدلاً من الرقم الثابت 5
+              itemCount: buttonCount, // عدد الأزرار الآن 6
               itemBuilder: (BuildContext context, int index) {
-                // Define button data
-                List<Map<String, dynamic>> buttonsData = [
-                  {
-                    'title': 'lidar',
-                    'subtitle': 'Manage and organize op room',
-                    'icon': Icons.man_4, // Example icon
-                    'onTap': () { 
-                      Navigator.pushNamed(context, "/lidar");
-                      // Action for Station button
-                      print('Station button pressed');
-                    },
-                  },
-                  {
-                    'title': 'Reports',
-                    'subtitle': 'Submit and manage reports',
-                    'icon': Icons.assignment, // Example icon
-                    'onTap': () {
-                        Navigator.pushNamed(context, "/reports");
-                      // Action for Reports button
-                      print('Reports button pressed');
-                    },
-                  },
-                  {
-                    'title': 'radio',
-                    'subtitle': 'Manage sectors and radio message',
-                    'icon': Icons.radio, // Example icon
-                    'onTap': () {
-                        Navigator.pushNamed(context, "/radiocar");
-                      // Action for Sectors button
-                      print('Sectors button pressed');
-                    },
-                  },
-                  {
-                    'title': 'Center',
-                    'subtitle': 'Manage main center',
-                    'icon': Icons.house_sharp, // Example icon
-                    'onTap': () {
-                        Navigator.pushNamed(context, "/cinter");
-                      // Action for Center button
-                      print('Center button pressed');
-                    },
-                  },
-                  {
-                    'title': 'Settings',
-                    'subtitle': 'Customize system settings',
-                    'icon': Icons.settings, // Example icon
-                    'onTap': () { 
-                      // التعديل هنا: استخدام المسار الصحيح /settings
-                      Navigator.pushNamed(context, "/seting");
-                      print('Settings button pressed');
-                    },
-                  },
-                ];
-
+                // التأكد من أن buttonCount يعكس حجم buttonsData
                 final button = buttonsData[index];
 
                 return GestureDetector(

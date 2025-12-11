@@ -1,12 +1,15 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
-// تعريف الدالة المساعدة لتمثيل تطبيقك، والتي يجب أن تكون في main.dart
-// ولأغراض العرض هنا، سنفترض وجود دالة callback لتغيير الوضع
+// تعريف الدالة المساعدة (Callback) لتمريرها من main.dart
 typedef ThemeModeCallback = void Function(ThemeMode mode);
 
 // هذا هو المكون الأساسي لصفحة الإعدادات
 class SettingPage extends StatelessWidget {
+  // 1. استقبال وضع الثيم الحالي (Light/Dark)
   final ThemeMode currentMode;
+  // 2. استقبال دالة التبديل (Callback Function)
   final ThemeModeCallback onModeChanged;
 
   const SettingPage({
@@ -15,80 +18,99 @@ class SettingPage extends StatelessWidget {
     required this.onModeChanged,
   });
 
-  // الألوان المستخدمة في التصميم (تماشياً مع تصميم Lidar)
-  static const Color _bgColorDark = Color(0xFF1E1E1E);
-  static const Color _cardColorDark = Color(0xFF2B2B2B);
-  static const Color _lightGrey = Colors.white70;
-
   @override
   Widget build(BuildContext context) {
-    // تحديد الألوان بناءً على الوضع الحالي
-    final isDarkMode = currentMode == ThemeMode.dark;
-    final backgroundColor = isDarkMode ? _bgColorDark : Colors.white;
-    final cardColor = isDarkMode ? _cardColorDark : const Color(0xFFF0F0F0);
-    final primaryTextColor = isDarkMode ? Colors.white : Colors.black87;
+    // تحديد ما إذا كان الوضع الداكن مُفعّلاً حاليًا
+    final bool isDarkMode = currentMode == ThemeMode.dark;
+
+    // استخدام الألوان من الثيم المطبق حاليًا (من MaterialApp في main.dart)
+    final theme = Theme.of(context);
+    final Color primaryTextColor = theme.textTheme.bodyLarge!.color!;
+    final Color secondaryTextColor = theme.hintColor;
+    // استخدام لون خلفية الشاشة (Scaffold Background) ولون البطاقة (Card Color) المحدد في الثيم
+    final Color cardColor = theme.cardColor;
+    final Color primaryColor = theme.primaryColor;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      // Scaffold سيستخدم اللون scaffoldBackgroundColor المعرف في main.dart
       appBar: AppBar(
         title: Text(
           'الإعدادات',
           style: TextStyle(color: primaryTextColor),
         ),
-        backgroundColor: cardColor,
-        iconTheme: IconThemeData(color: primaryTextColor),
-        elevation: 0,
+        // AppBar سيستخدم AppBarTheme المعرفة في main.dart
       ),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            // بطاقة خيار الوضع المظلم/الفاتح
-            Card(
-              color: cardColor,
-              elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Row(
+        children: [
+          // =================================================================
+          // عنصر تبديل الوضع الداكن
+          // =================================================================
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            decoration: BoxDecoration(
+              // يستخدم لون البطاقة الخاص بالثيم الحالي (cardColor)
+              color: cardColor, 
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(isDarkMode ? 0.2 : 0.05),
+                  blurRadius: 5,
+                )
+              ]
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
                   children: [
                     Icon(
                       isDarkMode ? Icons.dark_mode : Icons.light_mode,
-                      color: isDarkMode ? _lightGrey : Colors.blueGrey,
+                      // لون الأيقونة: أصفر للداكن، أزرق رمادي للفاتح
+                      color: isDarkMode ? Colors.amber.shade700 : Colors.blueGrey,
                     ),
-                    const SizedBox(width: 16),
+                    const SizedBox(width: 15),
                     Text(
-                      'وضع العرض',
+                      'الوضع الداكن (Dark Mode)',
                       style: TextStyle(
-                        color: primaryTextColor,
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const Spacer(),
-                    // زر التبديل الفعلي
-                    Switch(
-                      value: isDarkMode,
-                      onChanged: (bool value) {
-                        onModeChanged(value ? ThemeMode.dark : ThemeMode.light);
-                      },
-                      activeColor: Colors.blueAccent,
-                      inactiveTrackColor: Colors.grey.shade300,
-                    ),
-                    Text(
-                      isDarkMode ? 'مظلم' : 'فاتح',
-                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
                         color: primaryTextColor,
-                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ],
                 ),
-              ),
+                Switch(
+                  value: isDarkMode,
+                  // عند تغيير زر التبديل
+                  onChanged: (bool value) {
+                    // استدعاء الدالة الممررة (Callback) لتحديث الحالة في main.dart
+                    onModeChanged(value ? ThemeMode.dark : ThemeMode.light);
+                  },
+                  activeColor: primaryColor, // يستخدم لون التطبيق الأساسي
+                  inactiveTrackColor: Colors.grey.shade300,
+                ),
+              ],
             ),
-            // يمكن إضافة المزيد من الإعدادات هنا لاحقاً
-          ],
-        ),
+          ),
+          // =================================================================
+          
+          const SizedBox(height: 10),
+
+          // يمكنك إضافة المزيد من الإعدادات هنا
+          ListTile(
+            // ListTile سيستخدم اللون primaryTextColor
+            title: Text('إعدادات الإشعارات', style: TextStyle(color: primaryTextColor)),
+            trailing: Icon(Icons.arrow_forward_ios, size: 16, color: secondaryTextColor),
+          ),
+          ListTile(
+            title: Text('تسجيل الخروج', style: TextStyle(color: primaryTextColor)),
+            trailing: Icon(Icons.exit_to_app, size: 16, color: primaryColor),
+            onTap: () {
+              // منطق تسجيل الخروج
+            },
+          ),
+        ],
       ),
     );
   }
