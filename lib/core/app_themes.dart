@@ -1,116 +1,200 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
+import 'app_colors.dart';
 
-// يمكنك هنا استيراد ملف الألوان الثابتة إذا كنت قد أنشأته
-// import 'app_colors.dart'; 
-// ====================================================================
-// 1. App Theme Data Structure (هيكل بيانات الثيم)
-// ====================================================================
-// هيكل البيانات الذي يحدد مجموعة الألوان الكاملة لكل وضع (فاتح/داكن)
-class AppThemeData {
-  final Color primaryTextColor;
-  final Color secondaryTextColor;
-  final Color primaryColor;
-  final Color cardColor;
-  final Color backgroundColor;
-  final Color headerColor;
-  final Color inputFillColor; 
+class MissionTheme extends InheritedWidget {
+  final AppThemeData theme;
 
-  const AppThemeData({
-    required this.primaryTextColor,
-    required this.secondaryTextColor,
-    required this.primaryColor,
-    required this.cardColor,
-    required this.backgroundColor,
-    required this.headerColor,
-    required this.inputFillColor,
+  const MissionTheme({
+    super.key,
+    required this.theme,
+    required super.child,
   });
+
+  static AppThemeData of(BuildContext context) {
+    final missionTheme = context.dependOnInheritedWidgetOfExactType<MissionTheme>();
+    if (missionTheme == null) {
+      // Fallback to light theme if MissionTheme is not found
+      return AppThemeData.light;
+    }
+    return missionTheme.theme;
+  }
+
+  @override
+  bool updateShouldNotify(covariant MissionTheme oldWidget) {
+    return oldWidget.theme != theme;
+  }
 }
 
-// ====================================================================
-// 2. App Themes Definition (تعريف الثيمات)
-// ====================================================================
+class AppThemeData {
+  final ThemeData materialTheme;
+  final Color primaryTextColor;
+  final Color secondaryTextColor;
+  final Color inputFillColor;
+  final Color backgroundColor;
+  final Color cardColor;
+  final Color scaffoldBackgroundColor;
+  final Color dividerColor;
+  final Color borderColor;
+  final Color primaryColor;
+  final Color appBarBackground;
+  final Color appBarForeground;
 
+  const AppThemeData({
+    required this.materialTheme,
+    required this.primaryTextColor,
+    required this.secondaryTextColor,
+    required this.inputFillColor,
+    required this.backgroundColor,
+    required this.cardColor,
+    required this.scaffoldBackgroundColor,
+    required this.dividerColor,
+    required this.borderColor,
+    required this.primaryColor,
+    required this.appBarBackground,
+    required this.appBarForeground,
+  });
+
+  // Light Theme
+  static final AppThemeData light = AppThemeData(
+    materialTheme: AppThemes.lightTheme,
+    primaryTextColor: AppColors.lightPrimaryText,
+    secondaryTextColor: AppColors.lightSecondaryText,
+    inputFillColor: AppColors.lightInputFill,
+    backgroundColor: AppColors.lightBackground,
+    cardColor: AppColors.lightCard,
+    scaffoldBackgroundColor: AppColors.lightScaffold,
+    dividerColor: AppColors.lightDivider,
+    borderColor: AppColors.lightBorder,
+    primaryColor: AppColors.primaryBlue,
+    appBarBackground: AppColors.white,
+    appBarForeground: AppColors.lightPrimaryText,
+  );
+
+  // Dark Theme
+  static final AppThemeData dark = AppThemeData(
+    materialTheme: AppThemes.darkTheme,
+    primaryTextColor: AppColors.darkPrimaryText,
+    secondaryTextColor: AppColors.darkSecondaryText,
+    inputFillColor: AppColors.darkInputFill,
+    backgroundColor: AppColors.darkBackground,
+    cardColor: AppColors.darkCard,
+    scaffoldBackgroundColor: AppColors.darkScaffold,
+    dividerColor: AppColors.darkDivider,
+    borderColor: AppColors.darkBorder,
+    primaryColor: AppColors.primaryBlueLight,
+    appBarBackground: AppColors.darkCard,
+    appBarForeground: AppColors.darkPrimaryText,
+  );
+}
+
+// AppThemes class for Material ThemeData configurations
 class AppThemes {
-  // 1. تعريف الوضع الفاتح (Light Theme)
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primarySwatch: Colors.red,
-    primaryColor: Colors.red[700],
-    cardColor: Colors.white, // لون البطاقات في الوضع الفاتح
-    scaffoldBackgroundColor: Colors.grey[100],
-    
-    // تحديث AppBar ليظهر بشكل جيد في الوضع الفاتح
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.black87,
+    primarySwatch: Colors.blue,
+    primaryColor: AppColors.primaryBlue,
+    scaffoldBackgroundColor: AppColors.lightScaffold,
+    cardColor: AppColors.lightCard,
+    dividerColor: AppColors.lightDivider,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.white,
+      foregroundColor: AppColors.lightPrimaryText,
       elevation: 0,
       centerTitle: true,
+      iconTheme: IconThemeData(color: AppColors.lightPrimaryText),
     ),
-    
-    // تخصيص ألوان الإدخال (TextFields) لتعمل جيداً في الوضع الفاتح
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: Colors.grey),
+        borderSide: BorderSide(color: AppColors.lightBorder),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: AppColors.lightBorder),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: AppColors.primaryBlue, width: 2),
       ),
       filled: true,
-      fillColor: Colors.white,
-      labelStyle: TextStyle(color: Colors.grey[700]),
+      fillColor: AppColors.lightInputFill,
+      labelStyle: TextStyle(color: AppColors.lightSecondaryText),
+      hintStyle: TextStyle(color: AppColors.lightSecondaryText.withOpacity(0.7)),
     ),
-    
-    // تخصيص لون عناصر الراديو والمفاتيح
-    radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            return Colors.red[700];
-          }
-          return Colors.grey;
-        },
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(color: AppColors.lightPrimaryText),
+      bodyMedium: TextStyle(color: AppColors.lightPrimaryText),
+      bodySmall: TextStyle(color: AppColors.lightSecondaryText),
+      titleLarge: TextStyle(
+        color: AppColors.lightPrimaryText,
+        fontWeight: FontWeight.bold,
       ),
+    ),
+    colorScheme: ColorScheme.light(
+      primary: AppColors.primaryBlue,
+      secondary: AppColors.primaryBlueLight,
+      background: AppColors.lightBackground,
+      surface: AppColors.lightCard,
     ),
   );
 
-  // 2. تعريف الوضع الداكن (Dark Theme)
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primarySwatch: Colors.red,
-    primaryColor: Colors.red[600],
-    cardColor: Colors.grey[850], // لون البطاقات في الوضع الداكن
-    scaffoldBackgroundColor: Colors.grey[900],
-    
-    // تحديث AppBar ليظهر بشكل جيد في الوضع الداكن
+    primarySwatch: Colors.blue,
+    primaryColor: AppColors.primaryBlueLight,
+    scaffoldBackgroundColor: AppColors.darkScaffold,
+    cardColor: AppColors.darkCard,
+    dividerColor: AppColors.darkDivider,
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.grey[900],
-      foregroundColor: Colors.white,
+      backgroundColor: AppColors.darkCard,
+      foregroundColor: AppColors.darkPrimaryText,
       elevation: 0,
       centerTitle: true,
+      iconTheme: IconThemeData(color: AppColors.darkPrimaryText),
     ),
-    
-    // تخصيص ألوان الإدخال (TextFields) لتعمل جيداً في الوضع الداكن
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: Colors.grey),
+        borderSide: BorderSide(color: AppColors.darkBorder),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: AppColors.darkBorder),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: AppColors.primaryBlueLight, width: 2),
       ),
       filled: true,
-      fillColor: Colors.grey[800],
-      labelStyle: const TextStyle(color: Colors.white70),
-      hintStyle: const TextStyle(color: Colors.white54),
+      fillColor: AppColors.darkInputFill,
+      labelStyle: TextStyle(color: AppColors.darkSecondaryText),
+      hintStyle: TextStyle(color: AppColors.darkSecondaryText.withOpacity(0.7)),
     ),
-    
-    // تخصيص لون عناصر الراديو والمفاتيح
-    radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            return Colors.red[600];
-          }
-          return Colors.grey[600];
-        },
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(color: AppColors.darkPrimaryText),
+      bodyMedium: TextStyle(color: AppColors.darkPrimaryText),
+      bodySmall: TextStyle(color: AppColors.darkSecondaryText),
+      titleLarge: TextStyle(
+        color: AppColors.darkPrimaryText,
+        fontWeight: FontWeight.bold,
       ),
     ),
+    colorScheme: ColorScheme.dark(
+      primary: AppColors.primaryBlueLight,
+      secondary: AppColors.primaryBlue,
+      background: AppColors.darkBackground,
+      surface: AppColors.darkCard,
+    ),
   );
+}
+
+// Extension for easy access
+extension ThemeContextExtension on BuildContext {
+  AppThemeData get missionTheme => MissionTheme.of(this);
+  Color get primaryTextColor => MissionTheme.of(this).primaryTextColor;
+  Color get secondaryTextColor => MissionTheme.of(this).secondaryTextColor;
+  Color get inputFillColor => MissionTheme.of(this).inputFillColor;
+  Color get backgroundColor => MissionTheme.of(this).backgroundColor;
+  Color get cardColor => MissionTheme.of(this).cardColor;
+  ThemeData get materialTheme => MissionTheme.of(this).materialTheme;
 }

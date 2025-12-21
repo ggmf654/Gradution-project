@@ -1,68 +1,68 @@
-// ignore_for_file: camel_case_types
-
-import 'package:ems_op_room/core/app_themes.dart'; // <== NEW: تم استيراد ملف الثيمات
-import 'package:ems_op_room/pages/presenation/Reports/Reports.dart';
-import 'package:ems_op_room/pages/presenation/lidar/lidar.dart';
-import 'package:ems_op_room/pages/presenation/radio/radio&car.dart';
-import 'package:ems_op_room/pages/presenation/seting/seting.dart';
-import 'package:ems_op_room/pages/presenation/splash%20view/splash_view_body.dart';
-import 'package:ems_op_room/pages/presenation/login/login.dart';
-import 'package:ems_op_room/pages/presenation/welcome/welcome.dart';
-import 'package:ems_op_room/pages/presenation/CEO/CEO.dart';
+import '/presentation/CEO/CEO.dart';
+import 'core/app_themes.dart';
+import 'presentation/CEO/fleet_monitoring_screen.dart';
+import 'presentation/CEO/placeholder_screen.dart';
+import 'presentation/CEO/shift_exchange_screen.dart';
+import 'presentation/splash%20view/splash_view_body.dart';
 import 'package:flutter/material.dart';
+import 'presentation/seting/setting.dart';
+import 'presentation/login/login.dart';
+import 'presentation/welcome/welcome.dart';
+import 'presentation/Reports/reports.dart';
+import 'presentation/radio/radio&car.dart';
+import 'presentation/lidar/lidar.dart';
+import 'presentation/center/center.dart';
+import 'presentation/CEO/dashbord_body.dart';
+
 void main() {
   runApp(const EMS_OP_ROOM());
 }
 
-class EMS_OP_ROOM extends StatefulWidget {
+final ValueNotifier<bool> isDarkMode = ValueNotifier(false);
+
+class EMS_OP_ROOM extends StatelessWidget {
   const EMS_OP_ROOM({super.key});
 
   @override
-  State<EMS_OP_ROOM> createState() => _EMS_OP_ROOMState();
-}
-
-class _EMS_OP_ROOMState extends State<EMS_OP_ROOM> {
-  // 1. تعريف حالة وضع العرض الافتراضية
-  ThemeMode _themeMode = ThemeMode.dark; // البدء بالوضع الداكن كافتراضي
-
-  // 2. دالة التبديل التي سيتم تمريرها لصفحة الإعدادات
-  void _changeTheme(ThemeMode mode) {
-    setState(() {
-      _themeMode = mode;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      
-      // 3. تطبيق وضع العرض المُختار على MaterialApp
-      themeMode: _themeMode,
-
-      // 4. استدعاء الوضع الفاتح من الملف المركزي AppThemes
-      theme: AppThemes.lightTheme, 
-
-      // 5. استدعاء الوضع الداكن من الملف المركزي AppThemes
-      darkTheme: AppThemes.darkTheme,
-      
-      home: const SplashViewBody(),
-      routes: {
-        '/login': (context) => const Login(),
-        '/welcome': (context) => const Welcome(),
-        // تم تغيير اسم الكلاس هنا إلى Radiocar
-        '/radiocar': (context) => const Radiocar(), 
-        '/lidar': (context) => const Lidar(),
-        // تم تغيير المسار ليناسب الكلاس الموجود في الإمبورتس
-        '/cinter': (context) => const Center(), 
-        '/reports': (context) => const Reports(),
-        // 6. تمرير الدالة (callback) لصفحة الإعدادات
-        '/seting': (context) => SettingPage(
-              currentMode: _themeMode,
-              onModeChanged: _changeTheme,
-            ),
-            '/Dashboard': (context)=> const OverviewDashboardScreen(),
-      
+    return ValueListenableBuilder<bool>(
+      valueListenable: isDarkMode,
+      builder: (context, darkMode, _) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
+          theme: ThemeData(
+            brightness: Brightness.light,
+            primarySwatch: Colors.red,
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            primarySwatch: Colors.red,
+          ),
+          initialRoute: '/splash',
+          routes: {
+            '/splash': (context) => const SplashViewBody(),
+            '/login': (context) => const Login(),
+            '/welcome': (context) => const Welcome(),
+            '/dashboard': (context) => const OverviewDashboardScreen(),
+            '/radiocar': (context) => const RadioCar(),
+            '/lidar': (context) => const Lidar(),
+            '/center': (context) => const CenterPage(),
+            '/reports': (context) => const Reports(),
+            '/settings': (context) => const SettingPage(),
+            '/exchange': (context) => const ShiftExchangeScreen(),
+            '/overview': (context) => const DashboardBody(),
+            '/fleet': (context) => const FleetMonitoringScreen(),
+            '/shifts': (context) => const PlaceholderScreen(title: 'إدارة المناوبات'),
+            '/schedule': (context) => const PlaceholderScreen(title: 'توزيع الجدول'),
+          },
+          home:  MissionTheme(
+            theme: Theme.of(context).brightness == Brightness.dark
+                ? AppThemeData.dark
+                : AppThemeData.light,
+            child: SplashViewBody(),
+          ),
+        );
       },
     );
   }
