@@ -57,7 +57,7 @@ class MissionRow extends StatelessWidget {
           SizedBox(
             width: 80,
             child: ElevatedButton(
-              onPressed: () => print('End mission ${mission['id']}'),
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red.shade700,
                 padding: EdgeInsets.zero,

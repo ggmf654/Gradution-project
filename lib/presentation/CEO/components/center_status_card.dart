@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CenterStatusCard extends StatelessWidget {
   final Map<String, dynamic> center;
-  const CenterStatusCard({required this.center});
+  const CenterStatusCard({super.key, required this.center});
 
   @override
   Widget build(BuildContext context) {

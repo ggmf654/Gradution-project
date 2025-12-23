@@ -31,7 +31,7 @@ class _CenterStatsCardState extends State<CenterStatsCard> {
                 style: Theme.of(context).textTheme.titleMedium),
             const Divider(),
             DropdownButtonFormField<String>(
-              value: period,
+              initialValue: period,
               items: const [
                 DropdownMenuItem(value: 'currentDay', child: Text('اليوم الحالي')),
                 DropdownMenuItem(value: 'currentWeek', child: Text('هذا الأسبوع')),

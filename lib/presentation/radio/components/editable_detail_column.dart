@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../core/app_themes.dart';
-import '../../../core/constants.dart';
 
 class EditableDetailColumn extends StatefulWidget {
   final String label;

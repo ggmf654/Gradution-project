@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 
 class FilterPanel extends StatefulWidget {
-  const FilterPanel();
+  const FilterPanel({super.key});
 
   @override
-  _FilterPanelState createState() => _FilterPanelState();
+  FilterPanelState createState() => FilterPanelState();
 }
 
-class _FilterPanelState extends State<FilterPanel> {
+class FilterPanelState extends State<FilterPanel> {
   String? selectedSector;
   String? selectedCaseCode;
   String? selectedCaseType;
@@ -112,12 +112,11 @@ class _FilterPanelState extends State<FilterPanel> {
                 Text('${entry.value} مهمات', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               ],
             ),
-          )).toList(),
+          )),
 
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
-              print('تطبيق الفلتر: القطاع $selectedSector، الحالة $selectedCaseCode، النوع $selectedCaseType');
             },
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 45),
@@ -142,7 +141,7 @@ class _FilterPanelState extends State<FilterPanel> {
       children: [
         Text(label, textDirection: TextDirection.rtl, style: const TextStyle(fontWeight: FontWeight.w600)),
         DropdownButtonFormField<String>(
-          value: value,
+          initialValue: value,
           decoration: InputDecoration(
             hintText: 'اختر $label',
             border: const OutlineInputBorder(),

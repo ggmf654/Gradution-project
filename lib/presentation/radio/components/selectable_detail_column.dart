@@ -54,7 +54,7 @@ class SelectableDetailColumn extends StatelessWidget {
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: DropdownButtonFormField<String>(
-                value: currentValue,
+                initialValue: currentValue,
                 isExpanded: true,
                 style: TextStyle(
                   color: textColor,

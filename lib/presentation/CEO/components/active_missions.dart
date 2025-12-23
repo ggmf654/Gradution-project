@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ActiveMissionsCard extends StatelessWidget {
   final List<Map<String, String>> activeMissions;
-  const ActiveMissionsCard({required this.activeMissions});
+  const ActiveMissionsCard({super.key, required this.activeMissions});
 
   @override
   Widget build(BuildContext context) {

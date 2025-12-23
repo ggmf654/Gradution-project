@@ -43,7 +43,6 @@ class TimeInputColumn extends StatelessWidget {
 
     // Get colors based on current theme (same as EditableDetailColumn)
     final secondaryColor = theme.colorScheme.secondary;
-    final primaryColor = theme.colorScheme.primary;
     final textColor = theme.colorScheme.onSurface;
     final fillColor = theme.inputDecorationTheme.fillColor ??
         (isDark ? Colors.grey[800] : Colors.grey[100]);

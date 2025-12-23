@@ -46,7 +46,7 @@ class _SettingPageState extends State<SettingPage> {
                   onChanged: (value) {
                     isDarkMode.value = value;
                   },
-                  activeColor: theme.primaryColor,
+                  activeThumbColor: theme.primaryColor,
                 ),
               ],
             ),

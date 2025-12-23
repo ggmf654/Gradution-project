@@ -72,7 +72,7 @@ Widget reportRadioRow(
                 value: o,
                 groupValue: null,
                 onChanged: (_) {},
-                fillColor: MaterialStateProperty.all(primary),
+                fillColor: WidgetStateProperty.all(primary),
               ),
               Text(o, style: TextStyle(color: secondary)),
             ],

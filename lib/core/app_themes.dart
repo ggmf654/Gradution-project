@@ -133,7 +133,6 @@ class AppThemes {
     colorScheme: ColorScheme.light(
       primary: AppColors.primaryBlue,
       secondary: AppColors.primaryBlueLight,
-      background: AppColors.lightBackground,
       surface: AppColors.lightCard,
     ),
   );
@@ -182,7 +181,6 @@ class AppThemes {
     colorScheme: ColorScheme.dark(
       primary: AppColors.primaryBlueLight,
       secondary: AppColors.primaryBlue,
-      background: AppColors.darkBackground,
       surface: AppColors.darkCard,
     ),
   );

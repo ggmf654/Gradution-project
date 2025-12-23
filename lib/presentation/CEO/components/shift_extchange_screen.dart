@@ -14,12 +14,10 @@ class ShiftExchangeScreen extends StatelessWidget {
 
   void _handleAccept(BuildContext context, int id, String sender) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('تم قبول طلب التبديل من $sender', textDirection: TextDirection.rtl)));
-    print('Accepted request $id');
   }
 
   void _handleReject(BuildContext context, int id, String sender) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('تم رفض طلب التبديل من $sender', textDirection: TextDirection.rtl)));
-    print('Rejected request $id');
   }
 
   @override

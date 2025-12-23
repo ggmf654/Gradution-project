@@ -48,7 +48,7 @@ class _CenterMissionFiltersState extends State<CenterMissionFilters> {
       ValueChanged<String?> onChanged,
       ) {
     return DropdownButtonFormField<String>(
-      value: value,
+      initialValue: value,
       decoration: InputDecoration(labelText: label),
       items: items
           .map((e) => DropdownMenuItem(value: e, child: Text(e)))

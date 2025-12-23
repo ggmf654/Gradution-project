@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class ShiftStatsCard extends StatefulWidget {
-  const ShiftStatsCard();
+  const ShiftStatsCard({super.key});
 
   @override
   State<ShiftStatsCard> createState() => _ShiftStatsCardState();
@@ -90,7 +90,7 @@ class _ShiftStatsCardState extends State<ShiftStatsCard> {
             border: OutlineInputBorder(),
             isDense: true,
           ),
-          value: _period,
+          initialValue: _period,
           items: const [
             {'value': 'currentDay', 'label': 'هذا اليوم'},
             {'value': 'currentShift', 'label': 'هذه المناوبة'},

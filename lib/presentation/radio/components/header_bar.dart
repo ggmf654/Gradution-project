@@ -69,9 +69,8 @@ class HeaderBar extends StatelessWidget {
                 ],
               ),
 
-            // add mission button
             ElevatedButton(
-              onPressed: () => print('Add New Mission'),
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
                 shape: RoundedRectangleBorder(
