@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MapPlaceholder extends StatelessWidget {
+  const MapPlaceholder({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +25,7 @@ class MapPlaceholder extends StatelessWidget {
 class CenterStatusCard extends StatelessWidget {
   final Map<String, dynamic> center;
 
-  const CenterStatusCard({required this.center});
+  const CenterStatusCard({super.key, required this.center});
 
   @override
   Widget build(BuildContext context) {

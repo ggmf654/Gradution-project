@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class ShiftExchangeScreen extends StatelessWidget {
-  const ShiftExchangeScreen({super.key});
+class ShiftExchangePage extends StatelessWidget {
+  const ShiftExchangePage({super.key});
 
   final List<Map<String, dynamic>> exchangeRequests = const [
     {

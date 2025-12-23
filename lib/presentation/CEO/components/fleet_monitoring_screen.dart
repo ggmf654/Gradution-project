@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class FleetMonitoringScreen extends StatelessWidget {
-  const FleetMonitoringScreen({super.key});
+class FleetMonitoringPage extends StatelessWidget {
+  const FleetMonitoringPage({super.key});
 
   final List<Map<String, String>> activeVehicles = const [
     {'carId': 'AMB-01', 'driver': 'يوسف خالد', 'status': 'في الطريق إلى المريض', 'color': 'Red'},

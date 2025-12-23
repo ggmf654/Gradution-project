@@ -4,14 +4,14 @@ import 'dart:math';
 import 'components/header_bar.dart';
 import 'components/mission_row.dart';
 
-class RadioCar extends StatefulWidget {
-  const RadioCar({super.key});
+class RadioCarPage extends StatefulWidget {
+  const RadioCarPage({super.key});
 
   @override
-  State<RadioCar> createState() => _RadioCarState();
+  State<RadioCarPage> createState() => _RadioCarPageState();
 }
 
-class _RadioCarState extends State<RadioCar> {
+class _RadioCarPageState extends State<RadioCarPage> {
   late List<Map<String, String>> _missions;
   final Random _random = Random();
 

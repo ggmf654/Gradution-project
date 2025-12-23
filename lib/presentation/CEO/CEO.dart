@@ -6,7 +6,8 @@
 
 import 'package:flutter/material.dart';
 
-import 'dashbord_body.dart';
+import 'components/dashbord_body.dart';
+
 
 // ------------------------------------------
 // 1. إدارة الحالة (Dark/Light Mode)

@@ -8,7 +8,7 @@ import 'map_placeholder.dart' hide CenterStatusCard;
 
 class MainContent extends StatelessWidget {
   final bool isMobile;
-  const MainContent({this.isMobile = false});
+  const MainContent({super.key, this.isMobile = false});
   // ... (Data definitions remain the same) ...
   final List<Map<String, dynamic>> centersData = const [
     {'name': 'Center 100', 'activeTasks': 3, 'teams': {'active': 12, 'busy': 8, 'available': 15}},

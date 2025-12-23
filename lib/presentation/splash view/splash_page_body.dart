@@ -1,6 +1,6 @@
 import 'dart:async';
-import '../login/login.dart';
 import 'package:flutter/material.dart';
+import '../login/login.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -11,24 +11,36 @@ class SplashViewBody extends StatefulWidget {
 
 class _SplashViewBodyState extends State<SplashViewBody> {
   double progress = 0.0;
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    // تحديث التقدم تدريجياً على مدار 3 ثواني
-    Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      setState(() {
-        progress += 0.033; 
-        if (progress >= 1.0) {
-          progress = 1.0;
-          timer.cancel();
-          // هنا يمكنك الانتقال إلى الصفحة التالية
-         Navigator.pushReplacement(context,
-  MaterialPageRoute(builder: (context) => Login()),);
-          
-        }
-      });
-    });
+
+    _timer = Timer.periodic(
+      const Duration(milliseconds: 100),
+          (timer) {
+        setState(() {
+          progress += 0.033;
+
+          if (progress >= 1.0) {
+            progress = 1.0;
+            timer.cancel();
+
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const LoginPage()),
+            );
+          }
+        });
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -59,7 +71,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
               width: 200,
               child: LinearProgressIndicator(
                 value: progress,
-                backgroundColor: Colors.grey[300],
+                backgroundColor: Colors.grey,
                 color: Colors.black,
               ),
             ),

@@ -141,7 +141,6 @@ class _FilterPanelState extends State<FilterPanel> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label, textDirection: TextDirection.rtl, style: const TextStyle(fontWeight: FontWeight.w600)),
-        const SizedBox(height: 4),
         DropdownButtonFormField<String>(
           value: value,
           decoration: InputDecoration(
@@ -172,7 +171,6 @@ class _FilterPanelState extends State<FilterPanel> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label, textDirection: TextDirection.rtl, style: const TextStyle(fontWeight: FontWeight.w600)),
-        const SizedBox(height: 4),
         TextField(
           textAlign: TextAlign.right,
           keyboardType: keyboardType,
