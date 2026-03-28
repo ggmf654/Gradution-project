@@ -34,9 +34,9 @@ class CenterStatusCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             textDirection: TextDirection.rtl,
             children: [
-              _buildTeamStat(context, 'نشط', teams['active']!, Colors.red),
-              _buildTeamStat(context, 'مشغول', teams['busy']!, Colors.amber),
-              _buildTeamStat(context, 'متاح', teams['available']!, Colors.green),
+              _buildTeamStat(context, 'أحمر', teams['active']!, Colors.red),
+              _buildTeamStat(context, 'أحمر', teams['busy']!, Colors.amber),
+              _buildTeamStat(context, 'أخضر', teams['available']!, Colors.green),
             ],
           ),
         ],

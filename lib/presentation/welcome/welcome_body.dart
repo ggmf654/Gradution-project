@@ -1,8 +1,10 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: unused_import, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:ems_op_room/core/localization/app_localization.dart';
 import 'components/welcome_button_card.dart';
 import 'models/welcome_button_model.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomePageBody extends StatelessWidget {
   const WelcomePageBody({super.key});
@@ -21,12 +23,12 @@ class WelcomePageBody extends StatelessWidget {
 
     final List<WelcomeButtonModel> buttons = [
       WelcomeButtonModel(
-        title: 'lidar',
+        title: 'Lidar',
         subtitle: 'Manage and organize op room',
         icon: Icons.leaderboard,
         onTap: () {
-          Navigator.pushNamed(context, '/lidar');
-          print('Station button pressed');
+          context.go('/lidar');
+          print('Lidar button pressed');
         },
       ),
       WelcomeButtonModel(
@@ -34,16 +36,16 @@ class WelcomePageBody extends StatelessWidget {
         subtitle: 'Submit and manage reports',
         icon: Icons.assignment,
         onTap: () {
-          Navigator.pushNamed(context, '/reports');
+          context.go('/reports');
           print('Reports button pressed');
         },
       ),
       WelcomeButtonModel(
-        title: 'radio',
+        title: 'Radio',
         subtitle: 'Manage sectors and radio message',
         icon: Icons.radio,
         onTap: () {
-          Navigator.pushNamed(context, '/radiocar');
+          context.go('/radiocar');
           print('Radio button pressed');
         },
       ),
@@ -52,7 +54,7 @@ class WelcomePageBody extends StatelessWidget {
         subtitle: 'Manage main center',
         icon: Icons.house_sharp,
         onTap: () {
-          Navigator.pushNamed(context, '/center');
+          context.go('/center');
           print('Center button pressed');
         },
       ),
@@ -61,7 +63,7 @@ class WelcomePageBody extends StatelessWidget {
         subtitle: 'Customize system settings',
         icon: Icons.settings,
         onTap: () {
-          Navigator.pushNamed(context, '/settings');
+          context.go('/settings');
           print('Settings button pressed');
         },
       ),
@@ -70,7 +72,7 @@ class WelcomePageBody extends StatelessWidget {
         subtitle: 'View system overview and statistics',
         icon: Icons.dashboard,
         onTap: () {
-          Navigator.pushNamed(context, '/dashboard');
+          context.go('/dashboard');
           print('Dashboard button pressed');
         },
       ),

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ems_op_room/core/providers/app_providers.dart';
 import 'components/header_bar.dart';
 import 'components/mission_row.dart';
 
-class RadioCarPage extends StatefulWidget {
+class RadioCarPage extends ConsumerStatefulWidget {
   const RadioCarPage({super.key});
 
   @override
-  State<RadioCarPage> createState() => _RadioCarPageState();
+  ConsumerState<RadioCarPage> createState() => _RadioCarPageState();
 }
 
-class _RadioCarPageState extends State<RadioCarPage> {
+class _RadioCarPageState extends ConsumerState<RadioCarPage> {
   late List<Map<String, String>> _missions;
   final Random _random = Random();
 
@@ -70,10 +72,14 @@ class _RadioCarPageState extends State<RadioCarPage> {
 
   @override
   Widget build(BuildContext context) {
+    final extraMissions = ref.watch(radioMissionsProvider);
+    final allMissions = [..._missions, ...extraMissions];
+
     final theme = Theme.of(context);
     final isLargeScreen = MediaQuery.of(context).size.width > 1200;
 
-    final missionCounts = _missions.fold({'Red': 0, 'Yellow': 0, 'Green': 0}, (Map<String, int> acc, m) {
+    final missionCounts = allMissions.fold(
+        {'Red': 0, 'Yellow': 0, 'Green': 0}, (Map<String, int> acc, m) {
       final status = m['status'] ?? 'Green';
       acc[status] = (acc[status] ?? 0) + 1;
       return acc;
@@ -100,14 +106,14 @@ class _RadioCarPageState extends State<RadioCarPage> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(20),
-                          child: Column(
-                            children: _missions.map((mission) {
-                              return MissionRow(
-                                mission: mission,
-                                onUpdate: _updateMission,
-                              );
-                            }).toList(),
-                          ),
+                            child: Column(
+                              children: allMissions.map((mission) {
+                                return MissionRow(
+                                  mission: mission,
+                                  onUpdate: _updateMission,
+                                );
+                              }).toList(),
+                            ),
                         ),
                       ),
                       const SizedBox(height: 20),

@@ -1,7 +1,11 @@
-// app_colors.dart
 import 'package:flutter/material.dart';
 
 class AppColors {
+  // Helper method to check dark mode
+  static bool isDarkMode(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark;
+  }
+
   // Method to get colors based on current theme
   static Color getPrimaryText(BuildContext context) {
     return isDarkMode(context) ? darkPrimaryText : lightPrimaryText;
@@ -35,78 +39,140 @@ class AppColors {
     return isDarkMode(context) ? darkBorder : lightBorder;
   }
 
-  // Helper method to check dark mode
-  static bool isDarkMode(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark;
+  static Color getSecondaryTextColor(BuildContext context) {
+    return isDarkMode(context) ? darkSecondaryText : lightSecondaryText;
   }
 
-  // Primary Colors (theme-independent)
-  static const Color primaryBlue = Color(0xFF1976D2);
-  static const Color primaryBlueDark = Color(0xFF1565C0);
-  static const Color primaryBlueLight = Color(0xFF42A5F5);
+  static Color getSurfaceMuted(BuildContext context) {
+    return isDarkMode(context) ? darkSurfaceMuted : lightSurfaceMuted;
+  }
 
-  // Status Colors (theme-independent)
+  static Color getOverlay(BuildContext context) {
+    return isDarkMode(context) ? darkOverlay : lightOverlay;
+  }
+
+  static Color getCardBorder(BuildContext context) {
+    return isDarkMode(context) ? darkCardBorder : lightCardBorder;
+  }
+
+  static Color getSuccessContainer(BuildContext context) {
+    return isDarkMode(context) ? darkSuccessContainer : lightSuccessContainer;
+  }
+
+  static Color getWarningContainer(BuildContext context) {
+    return isDarkMode(context) ? darkWarningContainer : lightWarningContainer;
+  }
+
+  static Color getErrorContainer(BuildContext context) {
+    return isDarkMode(context) ? darkErrorContainer : lightErrorContainer;
+  }
+
+  static Color getInfoContainer(BuildContext context) {
+    return isDarkMode(context) ? darkInfoContainer : lightInfoContainer;
+  }
+
+  static LinearGradient getPrimaryGradient(BuildContext context) {
+    return isDarkMode(context) ? darkPrimaryGradient : lightPrimaryGradient;
+  }
+
+  // Brand colors
+  static const Color primaryBlue = Color(0xFF1565C0);
+  static const Color primaryBlueDark = Color(0xFF0D47A1);
+  static const Color primaryBlueLight = Color(0xFF42A5F5);
+  static const Color primaryCyan = Color(0xFF00ACC1);
+  static const Color accentTeal = Color(0xFF009688);
+
+  // Status colors
   static const Color statusRed = Color(0xFFE53935);
   static const Color statusYellow = Color(0xFFFFB300);
-  static const Color statusGreen = Color(0xFF43A047);
-  static const Color statusGrey = Color(0xFF757575);
+  static const Color statusGreen = Color(0xFF2E7D32);
+  static const Color statusGrey = Color(0xFF78909C);
 
-  // Light Theme Colors
-  static const Color lightPrimaryText = Color(0xFF212121);
-  static const Color lightSecondaryText = Color(0xFF757575);
-  static const Color lightInputFill = Color(0xFFFFFFFF);
-  static const Color lightBackground = Color(0xFFF5F5F5);
+  // Light theme core
+  static const Color lightPrimaryText = Color(0xFF102033);
+  static const Color lightSecondaryText = Color(0xFF5F7085);
+  static const Color lightInputFill = Color(0xFFF7FAFC);
+  static const Color lightBackground = Color(0xFFF4F7FB);
   static const Color lightCard = Color(0xFFFFFFFF);
-  static const Color lightScaffold = Color(0xFFF5F5F5);
-  static const Color lightDivider = Color(0xFFE0E0E0);
-  static const Color lightBorder = Color(0xFFBDBDBD);
+  static const Color lightScaffold = Color(0xFFF1F5F9);
+  static const Color lightDivider = Color(0xFFE2E8F0);
+  static const Color lightBorder = Color(0xFFD7E0EA);
+  static const Color lightSurfaceMuted = Color(0xFFEAF1F8);
+  static const Color lightOverlay = Color(0x99102033);
+  static const Color lightCardBorder = Color(0xFFE6EDF5);
 
-  // Dark Theme Colors
-  static const Color darkPrimaryText = Color(0xFFFFFFFF);
-  static const Color darkSecondaryText = Color(0xFFB0BEC5);
-  static const Color darkInputFill = Color(0xFF424242);
-  static const Color darkBackground = Color(0xFF303030);
-  static const Color darkCard = Color(0xFF424242);
-  static const Color darkScaffold = Color(0xFF303030);
-  static const Color darkDivider = Color(0xFF616161);
-  static const Color darkBorder = Color(0xFF757575);
+  // Dark theme core
+  static const Color darkPrimaryText = Color(0xFFF4F7FB);
+  static const Color darkSecondaryText = Color(0xFF9FB0C3);
+  static const Color darkInputFill = Color(0xFF142235);
+  static const Color darkBackground = Color(0xFF0B1420);
+  static const Color darkCard = Color(0xFF111E2E);
+  static const Color darkScaffold = Color(0xFF09111B);
+  static const Color darkDivider = Color(0xFF223247);
+  static const Color darkBorder = Color(0xFF24364D);
+  static const Color darkSurfaceMuted = Color(0xFF162538);
+  static const Color darkOverlay = Color(0xB309111B);
+  static const Color darkCardBorder = Color(0xFF1D3044);
 
-  // Common Colors (theme-independent)
+  // Semantic colors
+  static const Color success = Color(0xFF22C55E);
+  static const Color warning = Color(0xFFF59E0B);
+  static const Color error = Color(0xFFEF4444);
+  static const Color info = Color(0xFF38BDF8);
+
+  static const Color lightSuccessContainer = Color(0xFFEAF9F0);
+  static const Color lightWarningContainer = Color(0xFFFFF5DF);
+  static const Color lightErrorContainer = Color(0xFFFFE8E8);
+  static const Color lightInfoContainer = Color(0xFFE8F6FD);
+
+  static const Color darkSuccessContainer = Color(0xFF123322);
+  static const Color darkWarningContainer = Color(0xFF3B2A09);
+  static const Color darkErrorContainer = Color(0xFF3A1518);
+  static const Color darkInfoContainer = Color(0xFF0E2C3A);
+
+  // Common colors
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color transparent = Color(0x00000000);
-  static const Color disabled = Color(0xFFBDBDBD);
-  static const Color success = Color(0xFF4CAF50);
-  static const Color warning = Color(0xFFFF9800);
-  static const Color error = Color(0xFFF44336);
-  static const Color info = Color(0xFF2196F3);
+  static const Color disabled = Color(0xFF94A3B8);
 
-  // Button Colors (theme-independent)
-  static const Color buttonPrimary = Color(0xFF1976D2);
-  static const Color buttonSecondary = Color(0xFF757575);
-  static const Color buttonSuccess = Color(0xFF4CAF50);
-  static const Color buttonWarning = Color(0xFFFF9800);
-  static const Color buttonError = Color(0xFFF44336);
+  // Button colors
+  static const Color buttonPrimary = primaryBlue;
+  static const Color buttonSecondary = statusGrey;
+  static const Color buttonSuccess = success;
+  static const Color buttonWarning = warning;
+  static const Color buttonError = error;
+
+  static const LinearGradient lightPrimaryGradient = LinearGradient(
+    colors: [Color(0xFF0F6CBD), Color(0xFF19A0D8)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static const LinearGradient darkPrimaryGradient = LinearGradient(
+    colors: [Color(0xFF1A75CF), Color(0xFF0E4C82)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }
+
 extension AppColorsExtension on BuildContext {
-  // Theme mode
   bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
 
-  // Text colors
   Color get primaryTextColor => AppColors.getPrimaryText(this);
   Color get secondaryTextColor => AppColors.getSecondaryText(this);
 
-  // Background colors
   Color get backgroundColor => AppColors.getBackground(this);
   Color get scaffoldColor => AppColors.getScaffold(this);
   Color get cardColor => AppColors.getCard(this);
 
-  // UI colors
   Color get inputFillColor => AppColors.getInputFill(this);
   Color get dividerColor => AppColors.getDivider(this);
   Color get borderColor => AppColors.getBorder(this);
+  Color get mutedSurfaceColor => AppColors.getSurfaceMuted(this);
+  Color get overlayColor => AppColors.getOverlay(this);
+  Color get cardBorderColor => AppColors.getCardBorder(this);
 
-  // Constant colors (theme-independent)
   Color get primaryBlue => AppColors.primaryBlue;
   Color get statusRed => AppColors.statusRed;
   Color get statusYellow => AppColors.statusYellow;

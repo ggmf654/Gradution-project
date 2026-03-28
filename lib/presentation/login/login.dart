@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -67,7 +68,9 @@ class LoginPage extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/welcome");
+                        // بعد التحقق من بيانات تسجيل الدخول يمكنك إضافة منطق التحقق هنا
+                        // ثم التوجيه إلى صفحة الترحيب لاختيار الشاشة
+                        context.go('/welcome');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent,

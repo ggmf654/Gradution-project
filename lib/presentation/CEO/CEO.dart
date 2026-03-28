@@ -5,36 +5,40 @@
 // ignore_for_file: deprecated_member_use, unnecessary_to_list_in_spreads, library_private_types_in_public_api, avoid_print
 
 import 'package:flutter/material.dart';
-
-import 'components/dashbord_body.dart';
-
-
-// ------------------------------------------
-// 1. إدارة الحالة (Dark/Light Mode)
-// ------------------------------------------
-
-/// ValueNotifier لإدارة حالة الوضع الليلي/النهاري
-final ValueNotifier<bool> isDarkMode = ValueNotifier(false);
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ems_op_room/core/localization/app_localization.dart';
+import 'package:ems_op_room/core/providers/app_providers.dart';
+import 'package:ems_op_room/presentation/CEO/components/dashbord_body.dart';
 
 // ------------------------------------------
-// 2. شاشة Overview Dashboard الرئيسية - (تم التعديل لإضافة المسارات)
+// شاشة Overview Dashboard الرئيسية - محسنة
 // ------------------------------------------
 
-class OverviewDashboardScreen extends StatelessWidget {
+class OverviewDashboardScreen extends ConsumerWidget {
   const OverviewDashboardScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(languageProvider);
+    final l10n = AppLocalizations(language);
+
     return Scaffold(
-      appBar: AppBar(),
-      body: ValueListenableBuilder<bool>(
-        valueListenable: isDarkMode,
-        builder: (context, isDark, child) {
-          return Directionality(
-            textDirection: TextDirection.rtl,
-            child: const DashboardBody(),
-          );
-        },
+      appBar: AppBar(
+        title: Text(l10n.tr('dashboard')),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: Directionality(
+        textDirection: l10n.textDirection,
+        child: DashboardBody(),
       ),
     );
   }
